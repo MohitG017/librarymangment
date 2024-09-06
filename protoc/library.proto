@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package library;
+
+option go_package = "../generated";
+
+message Book {
+  int32 id = 1;
+  string title = 2;
+  string author = 3;
+  bool is_borrowed = 4;
+}
+
+message AddBookRequest {
+  Book book = 1;
+}
+
+message AddBookResponse {
+  Book book = 1;
+}
+
+message GetBooksRequest {}
+
+message GetBooksResponse {
+  repeated Book books = 1;
+}
+
+message BorrowBookRequest {
+  int32 book_id = 1;
+}
+
+message BorrowBookResponse {
+  Book book = 1;
+}
+
+message DeleteBookRequest {
+  int32 book_id = 1;
+}
+
+message DeleteBookResponse {
+  string message = 1;
+}
+
+message UpdateBookRequest {
+  Book book = 1;
+}
+
+message UpdateBookResponse {
+  Book book = 1;
+}
+
+service LibraryService {
+  rpc AddBook(AddBookRequest) returns (AddBookResponse);
+  rpc GetBooks(GetBooksRequest) returns (GetBooksResponse);
+  rpc BorrowBook(BorrowBookRequest) returns (BorrowBookResponse);
+  rpc DeleteBook(DeleteBookRequest) returns (DeleteBookResponse);
+  rpc UpdateBook(UpdateBookRequest) returns (UpdateBookResponse);
+}
